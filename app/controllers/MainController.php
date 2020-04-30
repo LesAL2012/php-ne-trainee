@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\Main;
+use fw\libs\Pagination;
 use R;
 
 class MainController extends AppController
@@ -11,13 +12,19 @@ class MainController extends AppController
     {
         $model = new Main;
 
-        $cardAnimal = R::getAll("SELECT id, title, summary, pictures FROM $model->tableInfoAnimals ORDER BY id DESC");
+        $total = R::count($model->tableInfoAnimals);
+        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $perPage = 3; // записей на странице при пагинации
+        $pagination = new Pagination($page, $perPage, $total);
+        $start = $pagination->getStart();
+
+        $cardAnimal = R::getAll("SELECT id, title, summary, pictures FROM $model->tableInfoAnimals ORDER BY id DESC LIMIT ?,?", [$start, $perPage]);
         $catAnimal = R::getAll("SELECT id, description FROM $model->tableCatAnimals ORDER BY category");
         $tagAnimal= R::getAll("SELECT DISTINCT tag FROM $model->tableTagAnimal ORDER BY tag");
 
         $this->setMeta('Main', 'Cat breeds', 'Cat breeds, cat category');
         $meta = $this->meta;
 
-        $this->set(compact('meta', 'cardAnimal', 'catAnimal', 'tagAnimal'));
+        $this->set(compact('meta', 'cardAnimal', 'catAnimal', 'tagAnimal', 'pagination'));
     }
 }

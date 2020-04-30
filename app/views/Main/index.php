@@ -14,7 +14,7 @@
                 foreach ($cardAnimal as $card) {
                     $out .= "<div class='col-lg-4 col-md-6'>";
                     $out .= "<div class='card'>";
-                    $out .= "<img src='images/images_animals/{$card['pictures']}' class='card-img-top'>";
+                    $out .= "<img src='images/images_animals/{$card['pictures']}' class='card-img-top' alt={$card['title']}> ";
                     $out .= "<div class='card-body'>";
                     $out .= "<h5 class='card-title'>{$card['title']}</h5>";
                     $out .= "<p class='card-text'>" . mb_strimwidth($card['summary'], 0, 100, "...") . "</p>";
@@ -41,7 +41,11 @@
             }
             ?>
         </div>
+    </div>
 
+    <hr>
+
+    <div class='row'>
         <div class="col-lg-12 text-center">
             <?
             if (!empty($tagAnimal)) {
@@ -51,6 +55,10 @@
             }
             ?>
         </div>
-
     </div>
+
+    <hr>
+
+    <?php echo $pagination ?>
+
 </div>

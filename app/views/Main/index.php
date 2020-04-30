@@ -12,7 +12,7 @@
             if (!empty($cardAnimal)) {
                 $out = "<div class='row'>";
                 foreach ($cardAnimal as $card) {
-                    $out .= "<div class='col-lg-4 col-md-6'>";
+                    $out .= "<div class='col-lg-4 col-md-6 my-1'>";
                     $out .= "<div class='card'>";
                     $out .= "<img src='images/images_animals/{$card['pictures']}' class='card-img-top' alt={$card['title']}> ";
                     $out .= "<div class='card-body'>";
@@ -30,16 +30,57 @@
         </div>
 
         <div class='col-lg-3'>
-            <?
-            if (!empty($catAnimal)) {
-                $out = '<div class="list-group">';
-                foreach ($catAnimal as $category) {
-                    $out .= '<a class="list-group-item list-group-item-action" href="/cat/' . $category['id'] . '">' . $category['description'] . '</a>';
-                }
-                $out .= '</div>';
-                echo $out;
-            }
-            ?>
+            <div class='row'>
+                <div class='col-lg-12 col-md-6 col-sm-6 my-1'>
+                    <?
+                    if (!empty($catAnimal)) {
+                        $out = '<div class="list-group">';
+                        foreach ($catAnimal as $category) {
+                            $out .= '<a class="list-group-item list-group-item-action" href="/cat/' . $category['id'] . '">' . $category['description'] . '</a>';
+                        }
+                        $out .= '</div>';
+                        echo $out;
+                    }
+                    ?>
+
+                </div>
+                <div class='col-lg-12 col-md-6 col-sm-6 my-1 px-4'>
+                    <form method="get" class="bg-secondary p-2 border border-dark rounded row">
+
+                        <?
+                        if (isset($_GET['page']) && $_GET['page'] != '') {
+                            $out = '<input type="input" name="page" ';
+                            $out .= "class='d-none' ";
+                            $out .= "value={$_GET['page']} >";
+                            echo $out;
+                        }
+                        ?>
+
+                        <div class="form-check col-6">
+                            <input class="form-check-input" id="asc" type="radio" value=""
+                                   name="desc" <? if ($desc != 'DESC') echo 'checked'; ?>>
+                            <label class="form-check-label font-weight-bold" for="asc"><i class="fas fa-long-arrow-alt-up"></i> ASC</label>
+                        </div>
+                        <div class="form-check col-6">
+                            <input class="form-check-input" id="id" type="radio" value="id"
+                                   name="sort" <? if ($sort == 'id') echo 'checked'; ?>>
+                            <label class="form-check-label font-weight-bold" for="id">ID</label>
+                        </div>
+                        <div class="form-check col-6">
+                            <input class="form-check-input" id="desc" type="radio" value="DESC"
+                                   name="desc" <? if ($desc == 'DESC') echo 'checked'; ?>>
+                            <label class="form-check-label font-weight-bold" for="desc"><i class="fas fa-long-arrow-alt-down"></i> DESC</label>
+                        </div>
+                        <div class="form-check col-6">
+                            <input class="form-check-input" id="title" type="radio" value="title"
+                                   name="sort" <? if ($sort == 'title') echo 'checked'; ?>>
+                            <label class="form-check-label font-weight-bold" for="title">TITLE</label>
+                        </div>
+
+                        <input class="btn btn-warning font-weight-bold mt-3" type="submit" value="Set sort parameters">
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 

@@ -18,13 +18,22 @@ class MainController extends AppController
         $pagination = new Pagination($page, $perPage, $total);
         $start = $pagination->getStart();
 
-        $cardAnimal = R::getAll("SELECT id, title, summary, pictures FROM $model->tableInfoAnimals ORDER BY id DESC LIMIT ?,?", [$start, $perPage]);
+        $sort = 'id';
+        $desc = 'DESC';
+        if (isset($_GET['sort']) && $_GET['sort'] != '') {
+            $sort = $_GET['sort'];
+        }
+        if (isset($_GET['desc'])) {
+            $desc = $_GET['desc'];
+        }
+
+        $cardAnimal = R::getAll("SELECT id, title, summary, pictures FROM $model->tableInfoAnimals ORDER BY $sort $desc LIMIT ?,?", [$start, $perPage]);
         $catAnimal = R::getAll("SELECT id, description FROM $model->tableCatAnimals ORDER BY category");
         $tagAnimal= R::getAll("SELECT DISTINCT tag FROM $model->tableTagAnimal ORDER BY tag");
 
         $this->setMeta('Main', 'Cat breeds', 'Cat breeds, cat category');
         $meta = $this->meta;
 
-        $this->set(compact('meta', 'cardAnimal', 'catAnimal', 'tagAnimal', 'pagination'));
+        $this->set(compact('meta', 'cardAnimal', 'catAnimal', 'tagAnimal', 'pagination', 'sort', 'desc'));
     }
 }

@@ -6,6 +6,11 @@
 </div>
 
 <div class="container">
+
+    <?= $pagination ?>
+
+    <hr>
+
     <div class='row'>
         <div class='col-lg-9'>
             <?
@@ -31,19 +36,11 @@
 
         <div class='col-lg-3'>
             <div class='row'>
-                <div class='col-lg-12 col-md-6 col-sm-6 my-1'>
-                    <?
-                    if (!empty($catAnimal)) {
-                        $out = '<div class="list-group">';
-                        foreach ($catAnimal as $category) {
-                            $out .= '<a class="list-group-item list-group-item-action" href="/cat/' . $category['id'] . '">' . $category['description'] . '</a>';
-                        }
-                        $out .= '</div>';
-                        echo $out;
-                    }
-                    ?>
 
+                <div class='col-lg-12 col-md-6 col-sm-6 my-1'>
+                    <?php require 'template/category.php' ?>
                 </div>
+
                 <div class='col-lg-12 col-md-6 col-sm-6 my-1 px-4'>
                     <form method="get" class="bg-secondary p-2 border border-dark rounded row">
 
@@ -86,20 +83,10 @@
 
     <hr>
 
-    <div class='row'>
-        <div class="col-lg-12 text-center">
-            <?
-            if (!empty($tagAnimal)) {
-                foreach ($tagAnimal as $tag) {
-                    echo "<a class='badge badge-info p-2 m-1' href='/main/tag-selection?tag={$tag['tag']}' class='tag'>{$tag['tag']}</a>";
-                }
-            }
-            ?>
-        </div>
-    </div>
+    <?php require 'template/tag.php' ?>
 
     <hr>
 
-    <?php echo $pagination ?>
+    <?= $pagination ?>
 
 </div>

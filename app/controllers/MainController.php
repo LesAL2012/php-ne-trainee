@@ -28,8 +28,9 @@ class MainController extends AppController
         }
 
         $cardAnimal = R::getAll("SELECT id, title, summary, pictures FROM $model->tableInfoAnimals ORDER BY $sort $desc LIMIT ?,?", [$start, $perPage]);
-        $catAnimal = R::getAll("SELECT id, description FROM $model->tableCatAnimals ORDER BY category");
-        $tagAnimal = R::getAll("SELECT DISTINCT tag FROM $model->tableTagAnimal ORDER BY tag");
+
+        $catAnimal = $this->getAllCatsAnimal();
+        $tagAnimal = $this->getAllTagsAnimal();
 
         $this->setMeta('Main', 'Cat breeds', 'Cat breeds, cat category');
         $meta = $this->meta;
@@ -63,6 +64,13 @@ class MainController extends AppController
 
         $tag = $_GET['tag'];
 
+        $total = R::count($model->tableTagAnimal, 'tag = ?', [$tag]);
+
+        if ($total == 0) {
+            $firstTag = R::getRow("SELECT tag FROM $model->tableTagAnimal LIMIT ?", [1]);
+            $tag = $_GET['tag'] = $firstTag['tag'];
+        }
+
         $getId = R::getAll("SELECT DISTINCT `public_id` FROM $model->tableTagAnimal WHERE `tag` = ?", [$tag]);
 
         $arrIdTag = [];
@@ -70,14 +78,55 @@ class MainController extends AppController
             $arrIdTag[] = $idTeg['public_id'];
         }
 
-        $articleTag = R::findLike($model->tableInfoAnimals, ['id' => $arrIdTag]);
-        $tagAnimal = R::getAll("SELECT DISTINCT tag FROM $model->tableTagAnimal ORDER BY tag");
+        $articles = $this->getArticles('id', $arrIdTag);
+        $tagAnimal = $this->getAllTagsAnimal();
 
-
-
-        $this->setMeta("Teg: $tag");
+        $this->setMeta("Tag: $tag");
         $meta = $this->meta;
 
-        $this->set(compact('meta', 'articleTag', 'tag', 'tagAnimal'));
+        $this->set(compact('meta', 'articles', 'tag', 'tagAnimal'));
+    }
+
+
+    public function categorySelectionAction()
+    {
+        $model = new Main;
+
+        $cat = $_GET['cat'];
+        $total = R::count($model->tableCatAnimals);
+        if ($cat > $total) {
+            $cat = $_GET['cat'] = $total;
+        } elseif ($cat < 1) {
+            $cat = $_GET['cat'] = 1;
+        }
+
+        $catData = R::getRow("SELECT * FROM $model->tableCatAnimals WHERE `id` = ? LIMIT ?", [$cat, 1]);
+
+        $articles = $this->getArticles('category_id', $cat);
+        $catAnimal = $this->getAllCatsAnimal();
+        $tagAnimal = $this->getAllTagsAnimal();
+
+        $this->setMeta("Category: ${catData['category']}");
+        $meta = $this->meta;
+
+        $this->set(compact('meta', 'articles', 'catData', 'tagAnimal', 'catAnimal'));
+    }
+
+    protected function getAllTagsAnimal()
+    {
+        $model = new Main;
+        return R::getAll("SELECT DISTINCT tag FROM $model->tableTagAnimal ORDER BY tag");
+    }
+
+    protected function getAllCatsAnimal()
+    {
+        $model = new Main;
+        return R::getAll("SELECT id, description FROM $model->tableCatAnimals ORDER BY category");
+    }
+
+    protected function getArticles($field, $param)
+    {
+        $model = new Main;
+        return R::findLike($model->tableInfoAnimals, [$field => $param], 'ORDER BY title');
     }
 }

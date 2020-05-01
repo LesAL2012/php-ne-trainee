@@ -13,7 +13,7 @@
             ?>
 
         </div>
-        <div class="col-lg-12 text-center">
+        <div class="col-lg-12 text-center mb-3">
 
             <?php
             foreach ($tag as $tagArticle) {
@@ -23,4 +23,4 @@
 
         </div>
     </div>
-</div>"
+</div>

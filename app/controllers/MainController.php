@@ -29,11 +29,31 @@ class MainController extends AppController
 
         $cardAnimal = R::getAll("SELECT id, title, summary, pictures FROM $model->tableInfoAnimals ORDER BY $sort $desc LIMIT ?,?", [$start, $perPage]);
         $catAnimal = R::getAll("SELECT id, description FROM $model->tableCatAnimals ORDER BY category");
-        $tagAnimal= R::getAll("SELECT DISTINCT tag FROM $model->tableTagAnimal ORDER BY tag");
+        $tagAnimal = R::getAll("SELECT DISTINCT tag FROM $model->tableTagAnimal ORDER BY tag");
 
         $this->setMeta('Main', 'Cat breeds', 'Cat breeds, cat category');
         $meta = $this->meta;
 
         $this->set(compact('meta', 'cardAnimal', 'catAnimal', 'tagAnimal', 'pagination', 'sort', 'desc'));
+    }
+
+    public function articleCatAction()
+    {
+        $model = new Main;
+
+        $id = $_GET['id'];
+
+        $article = R::getRow("SELECT * FROM $model->tableInfoAnimals WHERE `id` = ? LIMIT ?", [$id, 1]);
+        $tag = R::getAll("SELECT * FROM $model->tableTagAnimal WHERE `public_id` = ?", [$id]);
+
+        $tagText = '';
+        foreach ($tag as $item) {
+            $tagText .= $item['tag'] . '; ';
+        }
+
+        $this->setMeta($article['title'], $article['summary'], $tagText);
+        $meta = $this->meta;
+
+        $this->set(compact('meta', 'article', 'tag'));
     }
 }

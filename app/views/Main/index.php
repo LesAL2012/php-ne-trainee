@@ -18,7 +18,7 @@
                     $out .= "<div class='card-body'>";
                     $out .= "<h5 class='card-title'>{$card['title']}</h5>";
                     $out .= "<p class='card-text'>" . mb_strimwidth($card['summary'], 0, 100, "...") . "</p>";
-                    $out .= "<a class='btn btn-primary' href='article/" . $card['id'] . "'>Read more...</a>";
+                    $out .= "<a class='btn btn-primary' href='main/article-cat?id=" . $card['id'] . "'>Read more...</a>";
                     $out .= '</div>';
                     $out .= '</div>';
                     $out .= '</div>';
@@ -77,7 +77,7 @@
                             <label class="form-check-label font-weight-bold" for="title">TITLE</label>
                         </div>
 
-                        <input class="btn btn-warning font-weight-bold mt-3" type="submit" value="Set sort parameters">
+                        <input class="btn btn-warning font-weight-bold mt-3 border border-dark" type="submit" value="Set sort parameters">
                     </form>
                 </div>
             </div>

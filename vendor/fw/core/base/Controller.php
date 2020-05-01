@@ -13,6 +13,8 @@ abstract class Controller
     {
         $this->route = $route;
         $this->view = $route['action'];
+
+        session_start();
     }
 
     public function getView()

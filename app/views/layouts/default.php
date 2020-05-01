@@ -29,8 +29,24 @@
 
     <?php require_once('template/nav.php') ?>
 
+
     <div class="content">
-            <?= $content ?>
+        <div class="container mt-2">
+            <?php if (isset($_SESSION['error'])) : ?>
+                <div class="alert alert-danger">
+                    <?= $_SESSION['error'];
+                    unset($_SESSION['error']) ?>
+                </div>
+            <?php endif; ?>
+            <?php if (isset($_SESSION['success'])) : ?>
+                <div class="alert alert-success">
+                    <?= $_SESSION['success'];
+                    unset($_SESSION['success']) ?>
+                </div>
+            <?php endif; ?>
+        </div>
+
+        <?= $content ?>
     </div>
 
     <?php require_once('template/footer.php') ?>

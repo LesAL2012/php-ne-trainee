@@ -1,4 +1,5 @@
 /config/config_db.php
 /vendor/squizlabs/
+/vendor/vlucas/
 /.idea/
 /composer.lock

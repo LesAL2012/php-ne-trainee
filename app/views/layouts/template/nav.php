@@ -6,9 +6,9 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-item nav-link active" href="/">Home</a>
-                <a class="nav-item nav-link" href="#">Link 1</a>
-                <a class="nav-item nav-link" href="#">Link 2</a>
-                <a class="nav-item nav-link" href="#">Link 3</a>
+                <a class="nav-item nav-link" href="/user/sig-nup">SignUp</a>
+                <a class="nav-item nav-link" href="/user/login">LogIn</a>
+                <a class="nav-item nav-link" href="/user/logout">LogOut</a>
             </div>
         </div>
 

@@ -22,6 +22,8 @@ class UserController extends AppController
             $user->attributes['password'] = password_hash($user->attributes['password'], PASSWORD_DEFAULT);
             if ($user->save($user->tableUser)) {
                 $_SESSION['success'] = 'Registration completed successfully!';
+                $user->login();
+                redirect('/');
             } else {
                 $_SESSION['error'] = 'Registration failed, try again!';
             }
@@ -36,8 +38,18 @@ class UserController extends AppController
 
     public function loginAction()
     {
+        if (!empty($_POST)) {
+            $user = new User();
+            if ($user->login()) {
+                $_SESSION['success'] = 'AUTORIZATION IS SUCCESS!';
+            } else {
+                $_SESSION['error'] = 'AUTORIZATION IS NOT SUCCESS! - check <b>Login</b> and <b>Paswword</b>';
+                redirect();
+            }
+            redirect('/');
+        }
 
-        $this->setMeta("Login");
+        $this->setMeta("LogIn");
         $meta = $this->meta;
 
         $this->set(compact('meta'));
@@ -45,6 +57,10 @@ class UserController extends AppController
 
     public function logoutAction()
     {
+        if (isset($_SESSION['user'])) {
+            unset($_SESSION['user']);
+        }
+        redirect('/user/login');
     }
 
 }

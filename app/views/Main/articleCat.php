@@ -17,7 +17,7 @@
 
             <?php
             foreach ($tag as $tagArticle) {
-                echo "<a class='badge badge-info p-2 m-1' href='/tag.php?tag={$tagArticle['tag']}' class='tag'>{$tagArticle['tag']}</a>";
+                echo "<a class='badge badge-info p-2 m-1' href='/main/tag-selection?tag={$tagArticle['tag']}' class='tag'>{$tagArticle['tag']}</a>";
             }
             ?>
 

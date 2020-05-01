@@ -18,7 +18,7 @@
                     $out .= "<div class='card-body'>";
                     $out .= "<h5 class='card-title'>{$card['title']}</h5>";
                     $out .= "<p class='card-text'>" . mb_strimwidth($card['summary'], 0, 100, "...") . "</p>";
-                    $out .= "<a class='btn btn-primary' href='main/article-cat?id=" . $card['id'] . "'>Read more...</a>";
+                    $out .= "<a class='btn btn-primary' href='/main/article-cat?id=" . $card['id'] . "'>Read more...</a>";
                     $out .= '</div>';
                     $out .= '</div>';
                     $out .= '</div>';
@@ -91,7 +91,7 @@
             <?
             if (!empty($tagAnimal)) {
                 foreach ($tagAnimal as $tag) {
-                    echo "<a class='badge badge-info p-2 m-1' href='tag.php?tag={$tag['tag']}' class='tag'>{$tag['tag']}</a>";
+                    echo "<a class='badge badge-info p-2 m-1' href='/main/tag-selection?tag={$tag['tag']}' class='tag'>{$tag['tag']}</a>";
                 }
             }
             ?>

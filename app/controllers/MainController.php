@@ -56,4 +56,28 @@ class MainController extends AppController
 
         $this->set(compact('meta', 'article', 'tag'));
     }
+
+    public function tagSelectionAction()
+    {
+        $model = new Main;
+
+        $tag = $_GET['tag'];
+
+        $getId = R::getAll("SELECT DISTINCT `public_id` FROM $model->tableTagAnimal WHERE `tag` = ?", [$tag]);
+
+        $arrIdTag = [];
+        foreach ($getId as $idTeg) {
+            $arrIdTag[] = $idTeg['public_id'];
+        }
+
+        $articleTag = R::findLike($model->tableInfoAnimals, ['id' => $arrIdTag]);
+        $tagAnimal = R::getAll("SELECT DISTINCT tag FROM $model->tableTagAnimal ORDER BY tag");
+
+
+
+        $this->setMeta("Teg: $tag");
+        $meta = $this->meta;
+
+        $this->set(compact('meta', 'articleTag', 'tag', 'tagAnimal'));
+    }
 }

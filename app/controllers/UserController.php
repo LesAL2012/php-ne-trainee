@@ -4,6 +4,7 @@
 namespace app\controllers;
 
 use app\models\User;
+use fw\core\base\View;
 
 class UserController extends AppController
 {
@@ -30,10 +31,7 @@ class UserController extends AppController
             redirect();
         }
 
-        $this->setMeta("Registration");
-        $meta = $this->meta;
-
-        $this->set(compact('meta'));
+        View::setMeta("Registration");
     }
 
     public function loginAction()
@@ -41,18 +39,15 @@ class UserController extends AppController
         if (!empty($_POST)) {
             $user = new User();
             if ($user->login()) {
-                $_SESSION['success'] = 'AUTORIZATION IS SUCCESS!';
+                $_SESSION['success'] = 'Authorization is SUCCESS!';
             } else {
-                $_SESSION['error'] = 'AUTORIZATION IS NOT SUCCESS! - check <b>Login</b> and <b>Paswword</b>';
+                $_SESSION['error'] = 'Authorization is NOT SUCCESS! - check <b>Login</b> and <b>Paswword</b>';
                 redirect();
             }
             redirect('/');
         }
 
-        $this->setMeta("LogIn");
-        $meta = $this->meta;
-
-        $this->set(compact('meta'));
+        View::setMeta("LogIn");
     }
 
     public function logoutAction()

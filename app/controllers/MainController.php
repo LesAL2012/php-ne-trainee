@@ -100,7 +100,7 @@ class MainController extends AppController
 
         $catData = R::getRow("SELECT * FROM $model->tableCatAnimals WHERE `id` = ? LIMIT ?", [$cat, 1]);
 
-        $articles = $this->getArticles('category_id', $cat);
+        $articles = $this->getArticles('categoryid', $cat);
         $catAnimal = $this->getAllCatsAnimal();
         $tagAnimal = $this->getAllTagsAnimal();
 

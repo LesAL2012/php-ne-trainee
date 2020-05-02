@@ -56,7 +56,8 @@
                         <div class="form-check col-6">
                             <input class="form-check-input" id="asc" type="radio" value=""
                                    name="desc" <? if ($desc != 'DESC') echo 'checked'; ?>>
-                            <label class="form-check-label font-weight-bold" for="asc"><i class="fas fa-long-arrow-alt-up"></i> ASC</label>
+                            <label class="form-check-label font-weight-bold" for="asc"><i
+                                        class="fas fa-long-arrow-alt-up"></i> ASC</label>
                         </div>
                         <div class="form-check col-6">
                             <input class="form-check-input" id="id" type="radio" value="id"
@@ -66,7 +67,8 @@
                         <div class="form-check col-6">
                             <input class="form-check-input" id="desc" type="radio" value="DESC"
                                    name="desc" <? if ($desc == 'DESC') echo 'checked'; ?>>
-                            <label class="form-check-label font-weight-bold" for="desc"><i class="fas fa-long-arrow-alt-down"></i> DESC</label>
+                            <label class="form-check-label font-weight-bold" for="desc"><i
+                                        class="fas fa-long-arrow-alt-down"></i> DESC</label>
                         </div>
                         <div class="form-check col-6">
                             <input class="form-check-input" id="title" type="radio" value="title"
@@ -74,7 +76,8 @@
                             <label class="form-check-label font-weight-bold" for="title">TITLE</label>
                         </div>
 
-                        <input class="btn btn-warning font-weight-bold mt-3 border border-dark" type="submit" value="Set sort parameters">
+                        <input class="btn btn-warning font-weight-bold mt-3 border border-dark" type="submit"
+                               value="Set sort parameters">
                     </form>
                 </div>
             </div>

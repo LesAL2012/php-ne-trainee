@@ -17,7 +17,7 @@ class View
     public $scripts = [];
 
     //мета-теги
-    public static $meta = ['title' => '', 'desc' => '', 'keywords' => ''];
+    public static $meta = ['title' => '', 'description' => '', 'keywords' => ''];
 
     public function __construct($route, $layout = '', $view = '')
     {
@@ -70,17 +70,29 @@ class View
         return $content;
     }
 
-    public static function getMeta(){
-        echo '<title>' . self::$meta['title'] . '</title>';
-        echo '<meta name="description" content="' . self::$meta['desc'] . '">';
-        echo '<meta name="keywords" content="' . self::$meta['keywords'] . '">';
+    public static function getMeta()
+    {
+        if (self::$meta['title'] != '') {
+            echo "<title>" . self::$meta['title'] . "</title>";
+        } else {
+            echo "<title>TITLE::</title>";
+        }
+
+        if (self::$meta['description'] != '') {
+            echo " \n\t";
+            echo '<meta name="description" content="' . self::$meta['description'] . '">';
+        }
+
+        if (self::$meta['keywords'] != '') {
+            echo " \n\t";
+            echo '<meta name="keywords" content="' . self::$meta['keywords'] . '">';
+        }
     }
 
-    public static function setMeta($title = '', $desc = '', $keywords = '') {
+    public static function setMeta($title = '', $description = '', $keywords = '')
+    {
         self::$meta['title'] = $title;
-        self::$meta['desc'] = $desc;
+        self::$meta['description'] = $description;
         self::$meta['keywords'] = $keywords;
     }
-
-
 }

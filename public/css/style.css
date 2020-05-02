@@ -36,3 +36,11 @@ footer a {
 footer a:hover {
     text-decoration: none;
 }
+
+.tableCatList {
+    font-size: 12px;
+}
+
+.formCatList {
+    font-size: 12px;
+}

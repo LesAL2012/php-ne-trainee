@@ -13,7 +13,7 @@
 
     <link rel="stylesheet" href="/css/style.css">
 
-    <link rel="icon" href="/images/favicon.ico"/>
+    <link rel="icon" href="/images/favicon.ico" id="favicon">
 
     <!-- icon font -->
     <script src="/js/all.js" defer></script>
@@ -64,6 +64,16 @@
 <?php
 foreach ($scripts as $item) {
     echo $item;
+}
+?>
+
+<?php
+if (isset($_SESSION['user']['role']) && $_SESSION['user']['role'] == 'admin') {
+    $out = '<script>';
+    $out .= 'document.querySelector("#favicon").href = "/images/faviconCat.ico";';
+    $out .= '</script>';
+
+    echo $out;
 }
 ?>
 

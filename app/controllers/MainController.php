@@ -4,7 +4,7 @@ namespace app\controllers;
 
 use app\models\Main;
 use fw\libs\Pagination;
-use R;
+use \RedBeanPHP\R;
 
 class MainController extends AppController
 {

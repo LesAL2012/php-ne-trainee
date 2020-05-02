@@ -4,8 +4,9 @@ namespace fw\core\base;
 
 use fw\core\Db;
 use Valitron\Validator;
+use \RedBeanPHP\R;
 
-abstract class Model
+abstract class Model extends \RedBeanPHP\SimpleModel
 {
     protected $pdo;
     public $attributes = [];
@@ -41,11 +42,11 @@ abstract class Model
     //сохранеие юзера при регистрации в БД!
     public function save($table)
     {
-        $tbl = \R::dispense($table);
+        $tbl = R::dispense($table);
         foreach ($this->attributes as $name => $value) {
             $tbl->$name = $value;
         }
-        return \R::store($tbl);
+        return R::store($tbl);
     }
 
     //в моделях и контроллерах никаких тегов HTML быть не должно!!!! - это истключение

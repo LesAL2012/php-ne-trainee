@@ -10,11 +10,4 @@ class AppController extends \fw\core\base\Controller
     {
         parent::__construct($route);
     }
-
-    protected function setMeta($title = '', $desc = '', $keywords = '')
-    {
-        $this->meta['title'] = $title;
-        $this->meta['desc'] = $desc;
-        $this->meta['keywords'] = $keywords;
-    }
 }

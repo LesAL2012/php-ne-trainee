@@ -6,16 +6,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <?php \fw\core\base\View::getMeta() ?>
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
 
     <link rel="stylesheet" href="/css/style.css">
 
     <link rel="icon" href="/images/favicon.ico"/>
-
-    <title><?= $meta['title'] ?></title>
-    <meta name="description" content="<?= $meta['desc'] ?>">
-    <meta name="keywords" content="<?= $meta['keywords'] ?>">
 
     <!-- icon font -->
     <script src="/js/all.js" defer></script>
@@ -62,6 +60,13 @@
         crossorigin="anonymous"></script>
 <script src="/bootstrap/js/bootstrap.min.js"></script>
 <script src="/bootstrap/js/bootstrap.min.js"></script>
+
+<?php
+foreach ($scripts as $item) {
+    echo $item;
+}
+?>
+
 </body>
 
 </html>

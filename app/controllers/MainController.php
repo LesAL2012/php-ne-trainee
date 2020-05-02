@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\Main;
+use fw\core\base\View;
 use fw\libs\Pagination;
 use \RedBeanPHP\R;
 
@@ -32,10 +33,9 @@ class MainController extends AppController
         $catAnimal = $this->getAllCatsAnimal();
         $tagAnimal = $this->getAllTagsAnimal();
 
-        $this->setMeta('Main', 'Cat breeds', 'Cat breeds, cat category');
-        $meta = $this->meta;
+        View::setMeta('Main', 'Cat breeds', 'Cat breeds, cat category');
 
-        $this->set(compact('meta', 'cardAnimal', 'catAnimal', 'tagAnimal', 'pagination', 'sort', 'desc'));
+        $this->set(compact('cardAnimal', 'catAnimal', 'tagAnimal', 'pagination', 'sort', 'desc'));
     }
 
     public function articleCatAction()
@@ -52,10 +52,9 @@ class MainController extends AppController
             $tagText .= $item['tag'] . '; ';
         }
 
-        $this->setMeta($article['title'], $article['summary'], $tagText);
-        $meta = $this->meta;
+        View::setMeta($article['title'], $article['summary'], $tagText);
 
-        $this->set(compact('meta', 'article', 'tag'));
+        $this->set(compact('article', 'tag'));
     }
 
     public function tagSelectionAction()
@@ -81,10 +80,9 @@ class MainController extends AppController
         $articles = $this->getArticles('id', $arrIdTag);
         $tagAnimal = $this->getAllTagsAnimal();
 
-        $this->setMeta("Tag: $tag");
-        $meta = $this->meta;
+        View::setMeta("Tag: $tag");
 
-        $this->set(compact('meta', 'articles', 'tag', 'tagAnimal'));
+        $this->set(compact('articles', 'tag', 'tagAnimal'));
     }
 
 
@@ -106,10 +104,9 @@ class MainController extends AppController
         $catAnimal = $this->getAllCatsAnimal();
         $tagAnimal = $this->getAllTagsAnimal();
 
-        $this->setMeta("Category: ${catData['category']}");
-        $meta = $this->meta;
+        View::setMeta("Category: ${catData['category']}");
 
-        $this->set(compact('meta', 'articles', 'catData', 'tagAnimal', 'catAnimal'));
+        $this->set(compact('articles', 'catData', 'tagAnimal', 'catAnimal'));
     }
 
     protected function getAllTagsAnimal()

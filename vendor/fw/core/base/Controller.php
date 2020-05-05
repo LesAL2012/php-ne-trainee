@@ -13,6 +13,8 @@ abstract class Controller
     {
         $this->route = $route;
         $this->view = $route['action'];
+
+        session_start();
     }
 
     public function getView()
@@ -24,5 +26,9 @@ abstract class Controller
     public function set($vars)
     {
         $this->vars = $vars;
+    }
+
+    public function isAjax() {
+        return isset($_SERVER["HTTP_X_REQUESTED_WITH"]) && $_SERVER["HTTP_X_REQUESTED_WITH"] === 'XMLHttpRequest';
     }
 }

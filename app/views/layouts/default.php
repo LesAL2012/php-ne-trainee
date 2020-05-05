@@ -6,16 +6,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <?php \fw\core\base\View::getMeta() ?>
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
 
     <link rel="stylesheet" href="/css/style.css">
 
-    <link rel="icon" href="/images/favicon.ico"/>
-
-    <title><?= $meta['title'] ?></title>
-    <meta name="description" content="<?= $meta['desc'] ?>">
-    <meta name="keywords" content="<?= $meta['keywords'] ?>">
+    <link rel="icon" href="/images/favicon.ico" id="favicon">
 
     <!-- icon font -->
     <script src="/js/all.js" defer></script>
@@ -29,8 +27,24 @@
 
     <?php require_once('template/nav.php') ?>
 
+
     <div class="content">
-            <?= $content ?>
+        <div class="container mt-2">
+            <?php if (isset($_SESSION['error'])) : ?>
+                <div class="alert alert-danger">
+                    <?= $_SESSION['error'];
+                    unset($_SESSION['error']) ?>
+                </div>
+            <?php endif; ?>
+            <?php if (isset($_SESSION['success'])) : ?>
+                <div class="alert alert-success">
+                    <?= $_SESSION['success'];
+                    unset($_SESSION['success']) ?>
+                </div>
+            <?php endif; ?>
+        </div>
+
+        <?= $content ?>
     </div>
 
     <?php require_once('template/footer.php') ?>
@@ -46,6 +60,21 @@
         crossorigin="anonymous"></script>
 <script src="/bootstrap/js/bootstrap.min.js"></script>
 <script src="/bootstrap/js/bootstrap.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+<?php
+foreach ($scripts as $item) {
+    echo $item;
+}
+?>
+
+<?php if (isset($_SESSION['user']['role']) && $_SESSION['user']['role'] == 'admin') : ?>
+    <script>
+        document.querySelector("#favicon").href = "/images/faviconCat.ico";
+    </script>
+<?php endif; ?>
+
 </body>
 
 </html>

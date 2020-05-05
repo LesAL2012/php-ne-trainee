@@ -3,8 +3,9 @@
 namespace app\controllers;
 
 use app\models\Main;
+use fw\core\base\View;
 use fw\libs\Pagination;
-use R;
+use \RedBeanPHP\R;
 
 class MainController extends AppController
 {
@@ -32,10 +33,9 @@ class MainController extends AppController
         $catAnimal = $this->getAllCatsAnimal();
         $tagAnimal = $this->getAllTagsAnimal();
 
-        $this->setMeta('Main', 'Cat breeds', 'Cat breeds, cat category');
-        $meta = $this->meta;
+        View::setMeta('Main', 'Cat breeds', 'Cat breeds, cat category');
 
-        $this->set(compact('meta', 'cardAnimal', 'catAnimal', 'tagAnimal', 'pagination', 'sort', 'desc'));
+        $this->set(compact('cardAnimal', 'catAnimal', 'tagAnimal', 'pagination', 'sort', 'desc'));
     }
 
     public function articleCatAction()
@@ -45,17 +45,16 @@ class MainController extends AppController
         $id = $_GET['id'];
 
         $article = R::getRow("SELECT * FROM $model->tableInfoAnimals WHERE `id` = ? LIMIT ?", [$id, 1]);
-        $tag = R::getAll("SELECT * FROM $model->tableTagAnimal WHERE `public_id` = ?", [$id]);
+        $tag = R::getAll("SELECT * FROM $model->tableTagAnimal WHERE `publicid` = ?", [$id]);
 
         $tagText = '';
         foreach ($tag as $item) {
             $tagText .= $item['tag'] . '; ';
         }
 
-        $this->setMeta($article['title'], $article['summary'], $tagText);
-        $meta = $this->meta;
+        View::setMeta($article['title'], $article['summary'], $tagText);
 
-        $this->set(compact('meta', 'article', 'tag'));
+        $this->set(compact('article', 'tag'));
     }
 
     public function tagSelectionAction()
@@ -71,20 +70,19 @@ class MainController extends AppController
             $tag = $_GET['tag'] = $firstTag['tag'];
         }
 
-        $getId = R::getAll("SELECT DISTINCT `public_id` FROM $model->tableTagAnimal WHERE `tag` = ?", [$tag]);
+        $getId = R::getAll("SELECT DISTINCT `publicid` FROM $model->tableTagAnimal WHERE `tag` = ?", [$tag]);
 
         $arrIdTag = [];
         foreach ($getId as $idTeg) {
-            $arrIdTag[] = $idTeg['public_id'];
+            $arrIdTag[] = $idTeg['publicid'];
         }
 
         $articles = $this->getArticles('id', $arrIdTag);
         $tagAnimal = $this->getAllTagsAnimal();
 
-        $this->setMeta("Tag: $tag");
-        $meta = $this->meta;
+        View::setMeta("Tag: $tag");
 
-        $this->set(compact('meta', 'articles', 'tag', 'tagAnimal'));
+        $this->set(compact('articles', 'tag', 'tagAnimal'));
     }
 
 
@@ -93,23 +91,22 @@ class MainController extends AppController
         $model = new Main;
 
         $cat = $_GET['cat'];
-        $total = R::count($model->tableCatAnimals);
-        if ($cat > $total) {
-            $cat = $_GET['cat'] = $total;
-        } elseif ($cat < 1) {
-            $cat = $_GET['cat'] = 1;
-        }
+//        $total = R::count($model->tableCatAnimals);
+//        if ($cat > $total) {
+//            $cat = $_GET['cat'] = $total;
+//        } elseif ($cat < 1) {
+//            $cat = $_GET['cat'] = 1;
+//        }
 
         $catData = R::getRow("SELECT * FROM $model->tableCatAnimals WHERE `id` = ? LIMIT ?", [$cat, 1]);
 
-        $articles = $this->getArticles('category_id', $cat);
+        $articles = $this->getArticles('categoryid', $cat);
         $catAnimal = $this->getAllCatsAnimal();
         $tagAnimal = $this->getAllTagsAnimal();
 
-        $this->setMeta("Category: ${catData['category']}");
-        $meta = $this->meta;
+        View::setMeta("Category: ${catData['category']}");
 
-        $this->set(compact('meta', 'articles', 'catData', 'tagAnimal', 'catAnimal'));
+        $this->set(compact('articles', 'catData', 'tagAnimal', 'catAnimal'));
     }
 
     protected function getAllTagsAnimal()

@@ -38,9 +38,36 @@ footer a:hover {
 }
 
 .tableCatList {
-    font-size: 12px;
+    font-size: 14px;
 }
 
 .formCatList {
     font-size: 12px;
+}
+
+.w-32 {
+    width: 32px;
+}
+
+.w-24 {
+    width: 24px;
+}
+
+.w-16 {
+    width: 16px;
+}
+
+.float-cleaner::after {
+    content: "";
+    width: 100%;
+    clear: both;
+    display: block;
+}
+
+.dangerDel:hover{
+    background: red;
+}
+
+.dangerEd:hover{
+    background: yellow;
 }

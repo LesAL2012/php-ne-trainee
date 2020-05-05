@@ -61,21 +61,19 @@
 <script src="/bootstrap/js/bootstrap.min.js"></script>
 <script src="/bootstrap/js/bootstrap.min.js"></script>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
 <?php
 foreach ($scripts as $item) {
     echo $item;
 }
 ?>
 
-<?php
-if (isset($_SESSION['user']['role']) && $_SESSION['user']['role'] == 'admin') {
-    $out = '<script>';
-    $out .= 'document.querySelector("#favicon").href = "/images/faviconCat.ico";';
-    $out .= '</script>';
-
-    echo $out;
-}
-?>
+<?php if (isset($_SESSION['user']['role']) && $_SESSION['user']['role'] == 'admin') : ?>
+    <script>
+        document.querySelector("#favicon").href = "/images/faviconCat.ico";
+    </script>
+<?php endif; ?>
 
 </body>
 

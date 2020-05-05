@@ -45,7 +45,7 @@ class MainController extends AppController
         $id = $_GET['id'];
 
         $article = R::getRow("SELECT * FROM $model->tableInfoAnimals WHERE `id` = ? LIMIT ?", [$id, 1]);
-        $tag = R::getAll("SELECT * FROM $model->tableTagAnimal WHERE `public_id` = ?", [$id]);
+        $tag = R::getAll("SELECT * FROM $model->tableTagAnimal WHERE `publicid` = ?", [$id]);
 
         $tagText = '';
         foreach ($tag as $item) {
@@ -70,11 +70,11 @@ class MainController extends AppController
             $tag = $_GET['tag'] = $firstTag['tag'];
         }
 
-        $getId = R::getAll("SELECT DISTINCT `public_id` FROM $model->tableTagAnimal WHERE `tag` = ?", [$tag]);
+        $getId = R::getAll("SELECT DISTINCT `publicid` FROM $model->tableTagAnimal WHERE `tag` = ?", [$tag]);
 
         $arrIdTag = [];
         foreach ($getId as $idTeg) {
-            $arrIdTag[] = $idTeg['public_id'];
+            $arrIdTag[] = $idTeg['publicid'];
         }
 
         $articles = $this->getArticles('id', $arrIdTag);
@@ -91,12 +91,12 @@ class MainController extends AppController
         $model = new Main;
 
         $cat = $_GET['cat'];
-        $total = R::count($model->tableCatAnimals);
-        if ($cat > $total) {
-            $cat = $_GET['cat'] = $total;
-        } elseif ($cat < 1) {
-            $cat = $_GET['cat'] = 1;
-        }
+//        $total = R::count($model->tableCatAnimals);
+//        if ($cat > $total) {
+//            $cat = $_GET['cat'] = $total;
+//        } elseif ($cat < 1) {
+//            $cat = $_GET['cat'] = 1;
+//        }
 
         $catData = R::getRow("SELECT * FROM $model->tableCatAnimals WHERE `id` = ? LIMIT ?", [$cat, 1]);
 

@@ -5,54 +5,53 @@
         </div>
         <div class="col-lg-8 col-md-8 col-sm-8 ">
 
-                <form method="get" class="bg-secondary p-2 border border-dark rounded mb-2 row formCatList">
+            <form method="get" class="bg-secondary p-2 border border-dark rounded mb-2 row formCatList">
 
-                    <?
-                    if (isset($_GET['page']) && $_GET['page'] != '') {
-                        $out = '<input type="input" name="page" ';
-                        $out .= "class='d-none' ";
-                        $out .= "value={$_GET['page']} >";
-                        echo $out;
-                    }
-                    ?>
+                <?
+                if (isset($_GET['page']) && $_GET['page'] != '') {
+                    $out = '<input type="hidden" name="page" ';
+                    $out .= "value={$_GET['page']} >";
+                    echo $out;
+                }
+                ?>
 
-                    <div class="form-check col-5">
-                        <input class="form-check-input" id="asc" type="radio" value=""
-                               name="desc" <? if ($desc != 'DESC') echo 'checked'; ?>>
-                        <label class="form-check-label font-weight-bold" for="asc"><i
-                                    class="fas fa-long-arrow-alt-up"></i> ASC</label>
-                    </div>
-                    <div class="form-check col-4">
-                        <input class="form-check-input" id="id" type="radio" value="id"
-                               name="sort" <? if ($sort == 'id') echo 'checked'; ?>>
-                        <label class="form-check-label font-weight-bold" for="id">ID</label>
-                    </div>
-                    <div class="form-check col-3">
-                        <input class="form-check-input" id="title" type="radio" value="title"
-                               name="sort" <? if ($sort == 'title') echo 'checked'; ?>>
-                        <label class="form-check-label font-weight-bold" for="title">TITLE</label>
-                    </div>
-                    <div class="form-check col-5">
-                        <input class="form-check-input" id="desc" type="radio" value="DESC"
-                               name="desc" <? if ($desc == 'DESC') echo 'checked'; ?>>
-                        <label class="form-check-label font-weight-bold" for="desc"><i
-                                    class="fas fa-long-arrow-alt-down"></i> DESC</label>
-                    </div>
-                    <div class="form-check col-4">
-                        <input class="form-check-input" id="category" type="radio" value="category"
-                               name="sort" <? if ($sort == 'category') echo 'checked'; ?>>
-                        <label class="form-check-label font-weight-bold" for="category">CATEGORY</label>
-                    </div>
+                <div class="form-check col-5">
+                    <input class="form-check-input" id="asc" type="radio" value=""
+                           name="desc" <? if ($desc != 'DESC') echo 'checked'; ?>>
+                    <label class="form-check-label font-weight-bold" for="asc"><i
+                                class="fas fa-long-arrow-alt-up"></i> ASC</label>
+                </div>
+                <div class="form-check col-4">
+                    <input class="form-check-input" id="id" type="radio" value="id"
+                           name="sort" <? if ($sort == 'id') echo 'checked'; ?>>
+                    <label class="form-check-label font-weight-bold" for="id">ID</label>
+                </div>
+                <div class="form-check col-3">
+                    <input class="form-check-input" id="title" type="radio" value="title"
+                           name="sort" <? if ($sort == 'title') echo 'checked'; ?>>
+                    <label class="form-check-label font-weight-bold" for="title">TITLE</label>
+                </div>
+                <div class="form-check col-5">
+                    <input class="form-check-input" id="desc" type="radio" value="DESC"
+                           name="desc" <? if ($desc == 'DESC') echo 'checked'; ?>>
+                    <label class="form-check-label font-weight-bold" for="desc"><i
+                                class="fas fa-long-arrow-alt-down"></i> DESC</label>
+                </div>
+                <div class="form-check col-4">
+                    <input class="form-check-input" id="category" type="radio" value="category"
+                           name="sort" <? if ($sort == 'category') echo 'checked'; ?>>
+                    <label class="form-check-label font-weight-bold" for="category">CATEGORY</label>
+                </div>
 
-                    <div class="col-3 text-right">
-                        <input class="btn btn-sm btn-warning font-weight-bold border border-dark" type="submit" value="Set sort">
-                    </div>
+                <div class="col-3 text-right">
+                    <input class="btn btn-sm btn-warning font-weight-bold border border-dark" type="submit"
+                           value="Set sort">
+                </div>
 
-                </form>
+            </form>
 
         </div>
     </div>
-
 
 
     <div class="row">
@@ -81,7 +80,7 @@
             <?= $pagination ?>
         </div>
         <div class="col-lg-2 col-md-2 col-sm-2 text-right">
-            <a href="#">
+            <a href="cats/add-article">
                 <button class="btn btn-success border border-dark">Add new</button>
             </a>
         </div>
@@ -95,6 +94,11 @@
             <th>Picture</th>
             <th>Category</th>
             <th>Tags</th>
+            <th class="text-center"><img src="/images/edit_icon.png" alt="edit" class="w-24"></th>
+<!--            --><?php //if (isset($_SESSION['user']) && $_SESSION['user']['role'] == 'admin') : ?>
+                <th class="text-center"><img src="/images/delete_icon.png" alt="delete" class="w-24"></th>
+<!--            --><?php //endif; ?>
+
         </tr>
 
         <?php
@@ -121,6 +125,16 @@
             }
             $out .= "</td>";
 
+            $out .= '<td class="text-center align-middle dangerEd" data-id=' . $id . '>
+                    <img src="/images/edit_main_icon.png" alt="edit" class="w-32">
+                </td>';
+//            if (isset($_SESSION['user']) && $_SESSION['user']['role'] == 'admin') {
+                $out .= '<td class="text-center align-middle dangerDel" data-id=' . $id . '>
+                    <img src="/images/delete_main_icon.png" alt="edit" class="w-16">
+                </td>';
+//            }
+
+
             $out .= "</tr>";
         }
         $out .= '</table>';
@@ -131,5 +145,4 @@
 
 </div>
 
-
-<script src="js/cats.js"></script>
+<script src="/js/cats.js"></script>

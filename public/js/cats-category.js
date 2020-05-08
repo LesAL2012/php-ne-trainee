@@ -88,7 +88,7 @@ function removeCategory(id) {
                 if (res.match(/foreign key/)) {
                     document.querySelector('#insert').innerHTML = '<div class="bg-dark rounded p-2 my-2 text-center">' +
                         '<h3 class="text-danger">There is the FOREIGN KEY in two tables: category and posts!</h3>' +
-                        '<img src="/images/skull_48.png">'+
+                        '<img src="/images/skull_48.png" alt="skull">'+
                         '<h1 class="text-danger">ERROR: FOREIGN KEY!</h1>'+
                         '</div>';
                 } else {
@@ -98,7 +98,13 @@ function removeCategory(id) {
                 }
             },
             error: function () {
-                alert('ERROR!');
+                alert('REMOVE ERROR!');
+
+                document.querySelector('#insert').innerHTML = '<div class="bg-dark rounded p-2 my-2 text-center">' +
+                    '<h3 class="text-danger">There is the FOREIGN KEY in two tables: category and posts!</h3>' +
+                    '<img src="/images/skull_48.png" alt="skull">'+
+                    '<h1 class="text-danger">ERROR: FOREIGN KEY!</h1>'+
+                    '</div>';
             }
         });
     }

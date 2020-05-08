@@ -5,6 +5,7 @@ namespace app\controllers;
 
 use app\models\Mail;
 use fw\core\base\View;
+use fw\libs\ReCaptchaV3;
 use Swift_Attachment;
 use Swift_Mailer;
 use Swift_Message;
@@ -23,10 +24,12 @@ class MailController extends AppController
     {
         $this->postValidator();
 
+        ReCaptchaV3::getCaptchaVerify($_POST['token'], 0.9, '/mail');
+
         if (isset($_POST['option']) && $_POST['option'] == 'php-mail') {
             $to = $_POST['email'];
-            $subject = $_POST['subject'];
-            $message = $_POST['message'];
+            $subject = h($_POST['subject']);
+            $message = h($_POST['message']);
 
             if (isset($_FILES['filePHP']) && !empty($_FILES['filePHP']['name'][0])) {
                 $this->loadFiles('filePHP');
@@ -75,8 +78,8 @@ class MailController extends AppController
                 }
             } else {
                 $headers = "Content-type: text/html; charset=UTF-8 \r\n";
-                $headers .= "From: От кого письмо <examplePHPmail@sample.com>\r\n";
-                $headers .= "Reply-To: reply-to@example.com\r\n";
+                $headers .= "From: Test-site <examplePHPmail@sample.com>\r\n";
+                $headers .= "Reply-To: No-reply reply-to@example.com\r\n";
 
                 mail($to, $subject, $message, $headers);
             }
@@ -91,10 +94,12 @@ class MailController extends AppController
     {
         $this->postValidator();
 
+        ReCaptchaV3::getCaptchaVerify($_POST['token'], 0.9, '/mail');
+
         if (isset($_POST['option']) && $_POST['option'] == 'mail-swift') {
             $to = $_POST['email'];
-            $subject = $_POST['subject'];
-            $message = $_POST['message'];
+            $subject = h($_POST['subject']);
+            $message = h($_POST['message']);
 
             // Create the Transport/
             $transport = new Swift_SendmailTransport('/usr/sbin/sendmail -bs');
@@ -104,7 +109,7 @@ class MailController extends AppController
 
             // Create a message
             $message = (new Swift_Message($subject))
-                ->setFrom(['exampleSwiftMailer@sample.com' => 'example Swift Mailer'])
+                ->setFrom(['exampleSwiftMailer@sample.com' => 'Test-site'])
                 ->setTo([$to => 'Les'])
                 ->setBody($message);
 

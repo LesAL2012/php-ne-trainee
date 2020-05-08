@@ -11,6 +11,15 @@
         </div>
     <?php endif;
     unset($_SESSION['mail']); ?>
+    <?php if (isset($_SESSION['captcha']) && $_SESSION['captcha'] == 'bot') : ?>
+        <div class="bg-dark rounded p-2 my-2 text-center">
+            <h3
+                    class="text-danger">Are you BOT?
+            </h3>
+            <img src="/images/skull_48.png" alt="skull">
+        </div>
+    <?php endif;
+    unset($_SESSION['captcha']); ?>
     <hr>
     <div class="row ">
         <div class="col-lg-6 col-md-6 col-sm-6 ">
@@ -20,16 +29,18 @@
                 <hr>
                 <form action="/mail/mail-Php" method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="option" value="php-mail">
+                    <input type="hidden" name="token" class="token" value="">
 
                     <input type="email" name="email"
                            value="<?= isset($_SESSION['form_data']['email']) ? h($_SESSION['form_data']['email']) : ""; ?>"
-                           size="28"> :your email
+                           size="28" required> :your email
                     <hr>
                     <input type="text" name="subject"
                            value="<?= isset($_SESSION['form_data']['subject']) ? h($_SESSION['form_data']['subject']) : "Checking: PHP mail"; ?>"
-                           size="28"> :subject
+                           size="28" required> :subject
                     <hr>
-                    <textarea name="message" cols="28" rows="3"><?= isset($_SESSION['form_data']['message']) ? h($_SESSION['form_data']['message']) : "This mail was sent:
+                    <textarea name="message" cols="28"
+                              rows="3" required><?= isset($_SESSION['form_data']['message']) ? h($_SESSION['form_data']['message']) : "This mail was sent:
 by PHP mail."; ?></textarea> :message
                     <hr>
                     <input type="file" name="filePHP[]" multiple>
@@ -45,16 +56,18 @@ by PHP mail."; ?></textarea> :message
                 <hr>
                 <form action="/mail/mail-Swift" method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="option" value="mail-swift">
+                    <input type="hidden" name="token" class="token" value="">
 
                     <input type="email" name="email"
                            value="<?= isset($_SESSION['form_data']['email']) ? h($_SESSION['form_data']['email']) : ""; ?>"
-                           size="28"> :your email
+                           size="28" required> :your email
                     <hr>
                     <input type="text" name="subject"
                            value="<?= isset($_SESSION['form_data']['subject']) ? h($_SESSION['form_data']['subject']) : "Checking: Swift Mailer"; ?>"
-                           size="28"> :subject
+                           size="28" required> :subject
                     <hr>
-                    <textarea name="message" cols="28" rows="3"><?= isset($_SESSION['form_data']['message']) ? h($_SESSION['form_data']['message']) : "This mail was sent:
+                    <textarea name="message" cols="28"
+                              rows="3" required><?= isset($_SESSION['form_data']['message']) ? h($_SESSION['form_data']['message']) : "This mail was sent:
 by Swift Mailer."; ?></textarea> :message
                     <hr>
                     <input type="file" name="fileSwift[]" multiple>
@@ -69,6 +82,7 @@ by Swift Mailer."; ?></textarea> :message
             </div>
         </div>
     </div>
-
-
 </div>
+
+
+<?php \fw\libs\ReCaptchaV3::getScriptsHTML('homepage'); ?>

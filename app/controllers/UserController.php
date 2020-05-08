@@ -5,6 +5,7 @@ namespace app\controllers;
 
 use app\models\User;
 use fw\core\base\View;
+use fw\libs\ReCaptchaV3;
 
 class UserController extends AppController
 {
@@ -20,7 +21,10 @@ class UserController extends AppController
                 redirect();
             }
 
+            ReCaptchaV3::getCaptchaVerify($_POST['token'], 0.9, '/user/sign-up');
+
             $user->attributes['password'] = password_hash($user->attributes['password'], PASSWORD_DEFAULT);
+
             if ($user->save($user->tableUser)) {
                 $_SESSION['success'] = 'Registration completed successfully!';
                 $user->login();
@@ -37,6 +41,8 @@ class UserController extends AppController
     public function loginAction()
     {
         if (!empty($_POST)) {
+            ReCaptchaV3::getCaptchaVerify($_POST['token'], 0.9, '/user/login');
+
             $user = new User();
             if ($user->login()) {
                 $_SESSION['success'] = 'Authorization is SUCCESS!';

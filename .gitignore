@@ -1,4 +1,5 @@
 /config/config_db.php
+/config/config_captcha.php
 
 /vendor/gabordemooij/
 /vendor/squizlabs/

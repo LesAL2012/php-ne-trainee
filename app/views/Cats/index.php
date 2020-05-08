@@ -81,7 +81,7 @@
         </div>
         <div class="col-lg-2 col-md-2 col-sm-2 text-right">
             <a href="cats/add-article">
-                <button class="btn btn-success border border-dark">Add new</button>
+                <button class="btn btn-success border border-dark">Add/Edit</button>
             </a>
         </div>
     </div>

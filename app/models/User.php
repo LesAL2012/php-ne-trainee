@@ -7,7 +7,7 @@ use \RedBeanPHP\R;
 
 class User extends \fw\core\base\Model
 {
-    public $tableUser = 'user';
+    public $tableUser = 'catuser';
 
     public $attributes = [
         'login' => '',

@@ -11,6 +11,7 @@
     },
     "require": {
         "vlucas/valitron": "^1.4",
-        "gabordemooij/redbean": "dev-master"
+        "gabordemooij/redbean": "dev-master",
+        "swiftmailer/swiftmailer": "^6.0"
     }
 }

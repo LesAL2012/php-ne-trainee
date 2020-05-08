@@ -2,9 +2,9 @@
     <div class="container">
         <div class='row text-center' >
             <div class='col-lg-2 col-md-4 col-sm-4 col-4' >
-                <a href='https://resume.ts.biz.ua/' target='_blank' class='text-white' rel="noopener noreferrer">
+
                     <?= date('Y') ?> &copy; O.LES
-                </a>
+
             </div>
             <div class='col-lg-2 col-md-4 col-sm-4 col-4'>
                 <i class="fab fa-react"></i> REACT
@@ -19,7 +19,7 @@
                 <i class="fab fa-php"></i> PHP
             </div>
             <div class='col-lg-2 col-md-4 col-sm-4 col-4' >
-                <a href='https://github.com/LesAL2012?tab=repositories' target='_blank' class='text-white' rel="noopener noreferrer">
+                <a href='https://github.com/LesAL2012/php-ne-trainee' target='_blank' class='text-white' rel="noopener noreferrer">
                     <i class="fab fa-github"></i> GITHUB
                 </a>
             </div>

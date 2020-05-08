@@ -65,9 +65,21 @@ footer a:hover {
 }
 
 .dangerDel:hover{
-    background: red;
+    background: lightpink;
+}
+
+.dangerDel:hover img{
+    width: 24px;
 }
 
 .dangerEd:hover{
-    background: yellow;
+    background: lightyellow;
+}
+
+h2 img {
+    height: 32px;
+}
+
+.mail-div:hover{
+    background: lavender;
 }

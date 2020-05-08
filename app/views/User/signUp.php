@@ -1,8 +1,20 @@
 <div class="container">
     <h2 class="text-center mt-2">REGISTRATION</h2>
+    <?php if (isset($_SESSION['captcha']) && $_SESSION['captcha'] == 'bot') : ?>
+        <div class="bg-dark rounded p-2 my-2 text-center">
+            <h3
+                    class="text-danger">Are you BOT?
+            </h3>
+            <img src="/images/skull_48.png" alt="skull">
+        </div>
+    <?php endif;
+    unset($_SESSION['captcha']); ?>
     <div class="row">
         <div class="col-lg-6 col-md-8 col-sm-10 border border-dark mx-auto m-2 p-3 rounded">
-            <form method="post" action="/user/signup">
+            <form method="post" action="/user/signUp">
+
+                <input type="hidden" name="token" class="token" value="">
+
                 <div class="form-group">
                     <label for="login">Login</label>
                     <input type="text" class="form-control" id="login" name="login" placeholder="Type your Login"
@@ -34,4 +46,4 @@
     </div>
 </div>
 
-
+<?php \fw\libs\ReCaptchaV3::getScriptsHTML('homepage'); ?>

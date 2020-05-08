@@ -47,8 +47,9 @@
         <?= $content ?>
     </div>
 
-    <?php require_once('template/footer.php') ?>
+    <?php require_once('template/footer.php') ;?>
 </div>
+
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -59,7 +60,6 @@
         integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
         crossorigin="anonymous"></script>
 <script src="/bootstrap/js/bootstrap.min.js"></script>
-<script src="/bootstrap/js/bootstrap.min.js"></script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
@@ -69,9 +69,13 @@ foreach ($scripts as $item) {
 }
 ?>
 
-<?php if (isset($_SESSION['user']['role']) && $_SESSION['user']['role'] == 'admin') : ?>
+<?php if (isset($_SESSION['user']['role']) && $_SESSION['user']['role'] == 'user') : ?>
     <script>
         document.querySelector("#favicon").href = "/images/faviconCat.ico";
+    </script>
+<?php elseif (isset($_SESSION['user']['role']) && $_SESSION['user']['role'] == 'admin') : ?>
+    <script>
+        document.querySelector("#favicon").href = "/images/faviconAdmin.ico";
     </script>
 <?php endif; ?>
 

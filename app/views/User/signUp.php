@@ -46,4 +46,4 @@
     </div>
 </div>
 
-<?php \fw\libs\ReCaptchaV3::getScriptsHTML('homepage'); ?>
+<?php \fw\libs\ReCaptchaV3::getScriptsHTML('login'); ?>

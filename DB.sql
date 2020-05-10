@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: localhost:3306
--- Время создания: Май 08 2020 г., 19:58
+-- Время создания: Май 10 2020 г., 02:51
 -- Версия сервера: 5.6.47-cll-lve
 -- Версия PHP: 7.2.7
 
@@ -170,6 +170,36 @@ INSERT INTO `cattaganimals` (`id`, `tag`, `publicid`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `cattasks`
+--
+
+CREATE TABLE `cattasks` (
+  `id` int(11) NOT NULL,
+  `task` varchar(512) NOT NULL,
+  `username` varchar(32) NOT NULL,
+  `email` varchar(32) NOT NULL,
+  `status` tinyint(1) DEFAULT NULL,
+  `editadmin` tinyint(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `cattasks`
+--
+
+INSERT INTO `cattasks` (`id`, `task`, `username`, `email`, `status`, `editadmin`) VALUES
+(1, 'Get a pet cat.', 'Alex', 'al20@mail.com', 1, NULL),
+(2, 'Take the cat for a walk in the park.', 'Ivan', 'ivan@iv.net', NULL, NULL),
+(3, 'Take part in a regional cat show.', 'Nick', 'Nick@nk.com', NULL, 1),
+(4, 'Set a claw comb for claws.', 'Georg', 'igor@ig.net', NULL, NULL),
+(5, 'Comb out the coat.', 'Stas', 'stas@com.ua', 1, NULL),
+(6, 'Make an appointment with the veterinarian.', 'test', 'test@test.com', NULL, 1),
+(7, 'Cook fish and oatmeal.', 'Fedir', 'fedor@com.ua', NULL, NULL),
+(8, '    Change the toilet for the cat.', 'David', 'David@nk', 1, NULL),
+(9, 'Buy for cats:\r\n- milk;\r\n- meat;\r\n- fish.', 'Gevork', 'jorik@j.ar', 1, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `catuser`
 --
 
@@ -214,6 +244,12 @@ ALTER TABLE `cattaganimals`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Индексы таблицы `cattasks`
+--
+ALTER TABLE `cattasks`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Индексы таблицы `catuser`
 --
 ALTER TABLE `catuser`
@@ -227,19 +263,25 @@ ALTER TABLE `catuser`
 -- AUTO_INCREMENT для таблицы `catcategoryanimals`
 --
 ALTER TABLE `catcategoryanimals`
-  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT для таблицы `catfullinfoanimals`
 --
 ALTER TABLE `catfullinfoanimals`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=182;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=183;
 
 --
 -- AUTO_INCREMENT для таблицы `cattaganimals`
 --
 ALTER TABLE `cattaganimals`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=386;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=390;
+
+--
+-- AUTO_INCREMENT для таблицы `cattasks`
+--
+ALTER TABLE `cattasks`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT для таблицы `catuser`

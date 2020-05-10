@@ -45,6 +45,22 @@ footer a:hover {
     font-size: 12px;
 }
 
+.w-128{
+    width: 128px;
+}
+
+.w-96{
+    width: 96px;
+}
+
+.w-64{
+    width: 64px;
+}
+
+.w-48{
+    width: 48px;
+}
+
 .w-32 {
     width: 32px;
 }
@@ -82,4 +98,25 @@ h2 img {
 
 .mail-div:hover{
     background: lavender;
+}
+
+.table-darkLine, .table-darkLine TD, .table-darkLine TH {
+    border: 1px solid black;
+    padding: 3px;
+}
+
+.table-darkHead {
+    background-color: #e5e1e1;
+}
+
+.table-darkLine tr {
+    border: 3px solid black;
+}
+
+.bg-confirmed{
+    background: #c3e6cb;
+}
+
+.bg-notConfirmed{
+    background: #ffeeba;
 }

@@ -17,6 +17,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/mail">Mail</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/todo-list">To-Do List</a>
+                    </li>
                 </ul>
 
                 <div class="form-inline my-2 my-lg-0">
